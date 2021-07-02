@@ -1,13 +1,12 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :update, :destroy]
 
-  # GET /todos
   def index
-    @jobs = Jobs.all
+    @jobs = Job.all
     json_response(@jobs)
   end
 
   def show
+    @job = Job.find(params[:id])
     json_response(@job)
   end
 
