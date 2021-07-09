@@ -16,7 +16,7 @@ class JobsController < ApplicationController
     params.permit(:title, :description, :company, :location, :technologies,:logo,:position)
   end
 
-  def set_job
-    @job = Job.find(params[:id])
-  end
+  # def set_job
+  #   @job = Job.find(params[:id])
+  # end
 end
