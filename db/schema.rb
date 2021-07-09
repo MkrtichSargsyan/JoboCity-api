@@ -19,7 +19,8 @@ ActiveRecord::Schema.define(version: 2021_07_01_152145) do
     t.string "description"
     t.string "company"
     t.string "location"
-    t.text "technologies", default: [], array: true
+    t.text "qualifications", default: [], array: true
+    t.text "company_description"
     t.string "logo"
     t.string "position"
     t.string "date"
