@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 
-  skip_before_action :require_login
+  skip_before_action :authorized
 
   def index
     @jobs = Job.all
