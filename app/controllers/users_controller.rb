@@ -2,10 +2,9 @@ class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
   def create
-    # console('sss')
     @user = User.create(user_params)
     if @user.valid?
-      token = encode_token({ username: @user.username })
+      token = encode_token({ user_id: @user.id,username: @user.username })
       render json: { token: token }
     else
       render json: { error: 'Invalid username or password' }
@@ -24,8 +23,12 @@ class UsersController < ApplicationController
   end
 
   def apply
-    render json: { params: params }
-    # @user.applications.create()
+    @user = User.find(params[:user_id])
+    p '////////////'
+    p @user
+    job_id = params[:job_id]
+    user_id = params[:user_id]
+    @user.applications.create(user_id:user_id,job_id:job_id)
   end
 
   def auto_login
