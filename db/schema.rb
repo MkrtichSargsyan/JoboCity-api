@@ -10,17 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_152145) do
+ActiveRecord::Schema.define(version: 2021_07_12_022750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "applications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "job_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["job_id"], name: "index_applications_on_job_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
+
   create_table "jobs", force: :cascade do |t|
-    t.string "title"
     t.string "description"
     t.string "company"
     t.string "location"
-    t.text "technologies", default: [], array: true
+    t.text "qualifications", default: [], array: true
+    t.text "company_description"
     t.string "logo"
     t.string "position"
     t.string "date"
@@ -28,4 +37,13 @@ ActiveRecord::Schema.define(version: 2021_07_01_152145) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "applications", "jobs"
+  add_foreign_key "applications", "users"
 end
