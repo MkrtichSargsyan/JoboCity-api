@@ -10,7 +10,8 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
-    json_response(@job)
+    # json_response(@job)
+    render json: @job
   end
 
   private
