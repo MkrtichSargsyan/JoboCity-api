@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/apply', to: 'users#apply'
 
   resources :jobs
+
+  root 'jobs#index'
 end
