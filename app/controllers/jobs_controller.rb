@@ -1,8 +1,11 @@
 class JobsController < ApplicationController
 
+  skip_before_action :authorized
+
   def index
     @jobs = Job.all
-    json_response(@jobs)
+    # json_response(@jobs)
+    render json: @jobs
   end
 
   def show
@@ -13,10 +16,6 @@ class JobsController < ApplicationController
   private
 
   def job_params
-    params.permit(:title, :description, :company, :location, :technologies,:logo,:position)
-  end
-
-  def set_job
-    @job = Job.find(params[:id])
+    params.permit(:title, :description, :company, :location, :technologies, :logo, :position)
   end
 end
